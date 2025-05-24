@@ -1,0 +1,11 @@
+export let player;
+export let cursors;
+export let fightKeys;
+export let playerHealth = 100;
+export let playerHealthText;
+export let bots;
+export let currentLevel = 1;
+export let levelTimer;
+export let levelDuration = 60000;
+export let score = 0;
+export let scoreText;

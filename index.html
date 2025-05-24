@@ -51,34 +51,28 @@
 
     <!-- Modified script loading approach -->
     <script>
-        // Set a flag to track if Phaser loads
-        let phaserLoaded = false;
-        
         // Function to check if Phaser loaded properly
         function checkPhaserLoaded() {
             if (typeof Phaser !== 'undefined') {
-                document.getElementById('load-status').textContent = 'Phaser loaded successfully!';
-                phaserLoaded = true;
-                // Load the game script after Phaser is confirmed loaded
-                loadGameScript();
+                document.getElementById('load-status').textContent = 'Phaser loaded successfully! Loading game modules...';
+                // Game modules will be loaded via script tags with type="module"
             } else {
                 document.getElementById('load-status').textContent = 'Error: Phaser failed to load!';
             }
         }
         
-        // Function to load the game script
-        function loadGameScript() {
-            const gameScript = document.createElement('script');
-            gameScript.src = 'game.js';
-            gameScript.onerror = function() {
-                document.getElementById('load-status').textContent = 'Error: game.js failed to load!';
-            };
-            document.body.appendChild(gameScript);
-        }
-        
         // Check if Phaser loaded after a short delay
         window.onload = function() {
-            setTimeout(checkPhaserLoaded, 500);
+            setTimeout(checkPhaserLoaded, 500); // Keep Phaser load check
         };
     </script>
+
+    <!-- Load game modules -->
+    <script type="module" src="./config.js"></script>
+    <script type="module" src="./globals.js"></script>
+    <script type="module" src="./preload.js"></script>
+    <script type="module" src="./gameplay.js"></script>
+    <script type="module" src="./create.js"></script>
+    <script type="module" src="./update.js"></script>
+    <script type="module" src="./game.js"></script>
 </body>
