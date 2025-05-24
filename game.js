@@ -1,4 +1,4 @@
-// --- Game Configuration ---
+// configs
 const config = {
 	type: Phaser.AUTO,
 	width: 800,
@@ -19,6 +19,7 @@ const config = {
 	}
 };
 
+// globals
 let player;
 let cursors;
 let fightKeys;
