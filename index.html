@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character Fighter Game</title>
+    <!-- Using Phaser CDN -->
+    <script src="./phaser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        canvas {
+            border: 2px solid white;
+            margin-top: 20px;
+        }
+        #game-container {
+            position: relative;
+        }
+        #debug-panel {
+            color: white;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.7);
+            border-radius: 5px;
+        }
+        .controls {
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="debug-panel">
+        Game Loading Status: <span id="load-status">Loading...</span>
+    </div>
+    
+    <div id="game-container">
+        <!-- Phaser will create the canvas here -->
+    </div>
+    
+    <div class="controls">
+        <p>Controls: WASD to move, W to jump, U to attack</p>
+    </div>
+
+    <!-- Modified script loading approach -->
+    <script>
+        // Set a flag to track if Phaser loads
+        let phaserLoaded = false;
+        
+        // Function to check if Phaser loaded properly
+        function checkPhaserLoaded() {
+            if (typeof Phaser !== 'undefined') {
+                document.getElementById('load-status').textContent = 'Phaser loaded successfully!';
+                phaserLoaded = true;
+                // Load the game script after Phaser is confirmed loaded
+                loadGameScript();
+            } else {
+                document.getElementById('load-status').textContent = 'Error: Phaser failed to load!';
+            }
+        }
+        
+        // Function to load the game script
+        function loadGameScript() {
+            const gameScript = document.createElement('script');
+            gameScript.src = 'game.js';
+            gameScript.onerror = function() {
+                document.getElementById('load-status').textContent = 'Error: game.js failed to load!';
+            };
+            document.body.appendChild(gameScript);
+        }
+        
+        // Check if Phaser loaded after a short delay
+        window.onload = function() {
+            setTimeout(checkPhaserLoaded, 500);
+        };
+    </script>
+</body>
